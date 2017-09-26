@@ -1,13 +1,19 @@
-using System;
+using DependencyKata.Texts;
+using DependencyKata.Writer;
 
 namespace DependencyKata
 {
     public class UserDetails
     {
+        private readonly IWriter _writer;
         private string _passwordEncrypted;
         private string _password;
         private string _username;
         private string _fullname;
+
+        public UserDetails() : this(new ConsoleWriter()) { }
+
+        public UserDetails(IWriter writer) => _writer = writer;
 
         public string Password
         {
@@ -15,7 +21,7 @@ namespace DependencyKata
             {
                 if (value.Length < 8)
                 {
-                    Console.WriteLine("Password must be at least 8 characters in length. You fail.");
+                    _writer.WriteLine("Password must be at least 8 characters in length. You fail.");
                 }
                 else
                 {
@@ -29,9 +35,7 @@ namespace DependencyKata
             get
             {
                 // Encrypt the password (just reverse it, should be secure)
-                char[] array = _password.ToCharArray();
-                Array.Reverse(array);
-                _passwordEncrypted = new string(array);
+                _passwordEncrypted = new ReverseString(_password).AsString();
                 return _passwordEncrypted;
             }
         }

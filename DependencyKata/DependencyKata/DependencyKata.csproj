@@ -48,6 +48,7 @@
     <Compile Include="Reader\ReaderBookEnd.cs" />
     <Compile Include="Texts\FormatString.cs" />
     <Compile Include="Texts\IText.cs" />
+    <Compile Include="Texts\ReverseString.cs" />
     <Compile Include="UserDetails.cs" />
     <Compile Include="Writer\ConsoleWriter.cs" />
     <Compile Include="Writer\ConsoleWriterBookEnd.cs" />
