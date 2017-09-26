@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DependencyKata.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class DoItAllTests
     {
-        [Test, Category("Integration")]
+        [TestMethod, TestCategory("Integration")]
         public void DoItAll_Does_ItAll()
         {
-            var doItAll = new DoItAll();
+            DoItAll doItAll = new DoItAll();
             doItAll.Do();
         }
     }

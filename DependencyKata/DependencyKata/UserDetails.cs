@@ -29,7 +29,7 @@ namespace DependencyKata
             get
             {
                 // Encrypt the password (just reverse it, should be secure)
-                var array = _password.ToCharArray();
+                char[] array = _password.ToCharArray();
                 Array.Reverse(array);
                 _passwordEncrypted = new string(array);
                 return _passwordEncrypted;

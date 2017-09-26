@@ -1,10 +1,10 @@
 ﻿namespace DependencyKata.Console
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var doItAll = new DoItAll();
+            DoItAll doItAll = new DoItAll();
 
             doItAll.Do();
         }
