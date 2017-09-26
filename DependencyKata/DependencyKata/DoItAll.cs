@@ -1,38 +1,53 @@
-﻿using System;
+﻿using DependencyKata.Reader;
+using DependencyKata.Texts;
+using DependencyKata.Writer;
+using System;
 using System.IO;
 
 namespace DependencyKata
 {
     public class DoItAll
     {
+        private readonly IReader _reader;
+        private readonly IWriter _writer;
         private readonly UserDetails _userDetails = new UserDetails();
+
+        public DoItAll() : this(new ConsoleWriter(), new ConsoleReader()) { }
+
+        public DoItAll(IWriter writer, IReader reader)
+        {
+            _writer = writer;
+            _reader = reader;
+        }
 
         public void Do()
         {
-            Console.WriteLine("Enter a username");
-            _userDetails.Username = Console.ReadLine();
-            Console.WriteLine("Enter your full name");
-            string fullName = Console.ReadLine();
-            Console.WriteLine("Enter your password");
-            _userDetails.Password = Console.ReadLine();
-            Console.WriteLine("Re-enter your password");
-            string confirmPassword = Console.ReadLine();
+            _writer.WriteLine("Enter a username");
+            _userDetails.Username = _reader.Line();
+
+            _writer.WriteLine("Enter your full name");
+            string fullName = _reader.Line();
+
+            _writer.WriteLine("Enter your password");
+            _userDetails.Password = _reader.Line();
+
+            _writer.WriteLine("Re-enter your password");
+            string confirmPassword = _reader.Line();
 
             if (_userDetails.PasswordEncrypted != new UserDetails { Password = confirmPassword }.PasswordEncrypted)
             {
-                Console.WriteLine("The passwords don't match.");
-                Console.ReadKey();
+                _writer.WriteLine("The passwords don't match.");
+                _reader.WaitForKey();
                 return;
             }
 
-            string message = string.Format("Saving Details for User ({0}, {1}, {2})\n",
-                _userDetails.Username, fullName, _userDetails.PasswordEncrypted);
+            IText message = new FormatString("Saving Details for User ({0}, {1}, {2})\n", _userDetails.Username, fullName, _userDetails.PasswordEncrypted);
 
-            Console.Write(message);
+            _writer.Write(message.AsString());
 
             try
             {
-                Database.SaveToLog(message);
+                Database.SaveToLog(message.AsString());
             }
             catch (Exception ex)
             {
@@ -43,7 +58,7 @@ namespace DependencyKata
                         message, ex.Message);
                 }
             }
-            Console.ReadKey();
+            _reader.WaitForKey();
         }
     }
 }
