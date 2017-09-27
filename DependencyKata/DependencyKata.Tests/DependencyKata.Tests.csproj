@@ -66,6 +66,7 @@
     <Compile Include="Reader\ConsoleReaderTests.cs" />
     <Compile Include="Texts\FormatStringTests.cs" />
     <Compile Include="Texts\ReverseStringTests.cs" />
+    <Compile Include="Texts\EqualStringsTests.cs" />
     <Compile Include="UserDetailsTests.cs" />
     <Compile Include="Writer\ConsoleWriterTests.cs" />
   </ItemGroup>
@@ -78,7 +79,9 @@
       <Name>DependencyKata</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Retrievers\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -40,12 +40,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="Db\DatabaseLogBookEnd.cs" />
+    <Compile Include="Db\IDatabaseLogBookEnd.cs" />
     <Compile Include="DoItAll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader\ConsoleReader.cs" />
     <Compile Include="Reader\IReader.cs" />
     <Compile Include="Reader\IReaderBookEnd.cs" />
     <Compile Include="Reader\ReaderBookEnd.cs" />
+    <Compile Include="Retrievers\IRetrieval.cs" />
+    <Compile Include="Retrievers\PasswordRetrieve.cs" />
+    <Compile Include="Retrievers\Retrieval.cs" />
+    <Compile Include="Retrievers\UserDetailsRetrieve.cs" />
+    <Compile Include="Texts\EqualStrings.cs" />
     <Compile Include="Texts\FormatString.cs" />
     <Compile Include="Texts\IText.cs" />
     <Compile Include="Texts\ReverseString.cs" />

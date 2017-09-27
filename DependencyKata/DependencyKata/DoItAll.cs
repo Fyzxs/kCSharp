@@ -1,5 +1,6 @@
 ﻿using DependencyKata.Db;
 using DependencyKata.Reader;
+using DependencyKata.Retrievers;
 using DependencyKata.Texts;
 using DependencyKata.Writer;
 using System;
@@ -11,7 +12,6 @@ namespace DependencyKata
     {
         private readonly IReader _reader;
         private readonly IWriter _writer;
-        private readonly UserDetails _userDetails = new UserDetails();
 
         public DoItAll() : this(new ConsoleWriter(), new ConsoleReader()) { }
 
@@ -23,26 +23,9 @@ namespace DependencyKata
 
         public void Do()
         {
-            _writer.WriteLine("Enter a username");
-            _userDetails.Username = _reader.Line();
+            UserDetails userDetails = new UserDetailsRetrieve().Retrieve();
 
-            _writer.WriteLine("Enter your full name");
-            string fullName = _reader.Line();
-
-            _writer.WriteLine("Enter your password");
-            _userDetails.Password = _reader.Line();
-
-            _writer.WriteLine("Re-enter your password");
-            string confirmPassword = _reader.Line();
-
-            if (_userDetails.PasswordEncrypted != new UserDetails { Password = confirmPassword }.PasswordEncrypted)
-            {
-                _writer.WriteLine("The passwords don't match.");
-                _reader.WaitForKey();
-                return;
-            }
-
-            IText message = new FormatString("Saving Details for User ({0}, {1}, {2})\n", _userDetails.Username, fullName, _userDetails.PasswordEncrypted);
+            IText message = new FormatString("Saving Details for User ({0}, {1}, {2})\n", userDetails.Username, userDetails.Fullname, userDetails.PasswordEncrypted);
 
             _writer.Write(message.AsString());
 
