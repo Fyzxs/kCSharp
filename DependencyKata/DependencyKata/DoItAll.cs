@@ -1,4 +1,5 @@
-﻿using DependencyKata.Reader;
+﻿using DependencyKata.Db;
+using DependencyKata.Reader;
 using DependencyKata.Texts;
 using DependencyKata.Writer;
 using System;
@@ -47,7 +48,7 @@ namespace DependencyKata
 
             try
             {
-                Database.SaveToLog(message.AsString());
+                new DatabaseLogBookEnd().Save(message.AsString());
             }
             catch (Exception ex)
             {
